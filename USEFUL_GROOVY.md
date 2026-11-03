@@ -5,11 +5,21 @@
 
 ```Groovy
 def fileName = message.getHeader("CamelFileNameOnly", String) ?: "payload.txt"
+// ou
+def headers = message.getHeaders();
+def value = headers.get("oldHeader");
+message.setHeader("oldHeader", value + " modified");
+message.setHeader("newHeader", "newHeader");
+
 def sourceDirectory = message.getProperty("SourceDirectory") ?: "SourceDirectory"
+// ou
+def properties = message.getProperties();
+value = properties.get("oldProperty");
+message.setProperty("oldProperty", value + " modified");
+message.setProperty("newProperty", "newProperty");
 ```
 
 ```Groovy
-message.setProperty("isValid", isValid)
 ```
 
 ## Custom Header & property
@@ -27,6 +37,7 @@ def Message processData(Message message) {
 }
 ```
 
+## Import v2
 ```Groovy
-
+import com.sap.it.script.v2.api.Message;
 ```
